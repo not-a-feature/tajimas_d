@@ -122,14 +122,5 @@ def tajimas_d(sequences: List[str]) -> float:
     e2 = c2 / ((harmonic**2) + a2)
 
     delta_Theta = (theta_pi - (seg_sites/harmonic))
-    print(f"{seg_sites}")
-    print(f"{harmonic=}")
-    print(f"{a2=}")
-    print(f"{b1=}")
-    print(f"{b2=}")
-    print(f"{c1=}")
-    print(f"{c2=}")
-    print(f"{e1=}")
-    print(f"{e2=}")
     tD = delta_Theta / (((e1 * seg_sites) + (e2 * seg_sites * (seg_sites - 1)))**0.5)  # Ref 27
     return float(tD)
