@@ -132,4 +132,4 @@ def tajimas_d(sequences: List[str]) -> float:
     print(f"{e1=}")
     print(f"{e2=}")
     tD = delta_Theta / (((e1 * seg_sites) + (e2 * seg_sites * (seg_sites - 1)))**0.5)  # Ref 27
-    return tD
+    return float(tD)
