@@ -130,3 +130,6 @@ dmypy.json
 
 # VSCode
 .vscode/
+
+# Auto Flake8
+flake8-fix.py
