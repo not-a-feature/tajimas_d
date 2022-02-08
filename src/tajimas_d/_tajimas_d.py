@@ -12,6 +12,14 @@ from typing import List
 
 
 def __check(sequences: List[str]) -> None:
+    """
+    Check for valid sequence proportions (1 < n, samle length).
+
+    Input:
+        sequences: list of str, list of sequences.
+    Returns:
+        Raises ValueError
+    """
     if len(sequences) < 2:
         raise ValueError("At leat 2 sequences required")
 
@@ -27,14 +35,16 @@ def pi_estimator(sequences: List[str], safe=True) -> float:
 
     Input:
         sequences: list of str, list of sequences.
+        safe: bool, check if sequences have the same length.
     Returns:
         Θ_π: float: Pi estimator.
     """
-    # Check for valid sequence proportions
+    # Check for valid sequence proportions.
     if safe:
         __check(sequences)
 
     pairwise = combinations(sequences, 2)
+    # Pairwise differences
     cs = [sum([not charA == charB for charA, charB in zip(seqA, seqB)]) for seqA, seqB in pairwise]
     n = len(sequences)
     binomial = ((n - 1)*n)/2  # Binomial(n, 2)
@@ -43,6 +53,14 @@ def pi_estimator(sequences: List[str], safe=True) -> float:
 
 
 def __segregating(sequences: List[str]) -> int:
+    """
+    Counts the number of segregating sites.
+
+    Input:
+        sequences: list of str, list of sequences.
+    Returns:
+        seg_sites: int, number of segregating sites.
+    """
     seg_sites = 0
     # For each position in sequence
     for i in range(0, len(sequences[0])):
@@ -71,10 +89,11 @@ def watterson_estimator(sequences: List[str], safe=True) -> float:
     Θ_W = Number of segregating sites / (n th harmonic number)
     Input:
         sequences: list of str, list of sequences.
+        safe: bool, check for valid sequence proportions.
     Returns:
         Θ_W: float: Watterson estimator.
     """
-    # Check for valid sequence proportions
+    # Check for valid sequence proportions.
     if safe:
         __check(sequences)
 
@@ -92,15 +111,16 @@ def tajimas_d(sequences: List[str]) -> float:
         genomics-fall-2005/study-materials/tajimad1.pdf
 
     Input:
-        sequences: list of str, list of sequences
+        sequences: list of str, list of sequences.
     Returns:
         Θ_D: float: Tajima's D.
-
     """
+    # Check for valid sequence proportions.
     __check(sequences)
 
     seg_sites = __segregating(sequences)  # Number of segregatig sites
 
+    # Prevent devision by 0
     if seg_sites == 0:
         return 0
 
@@ -109,7 +129,7 @@ def tajimas_d(sequences: List[str]) -> float:
     num_seq = len(sequences)  # Number of sequences
     harmonic = __harmonic(num_seq)  # N-1th harmonic number
 
-    harmonic = sum([1 / i for i in range(1, num_seq)])  # Ref 3, a1
+    harmonic = sum([1 / i for i in range(1, num_seq)])  # Ref 3, aka. a1
     a2 = sum([1 / (i**2) for i in range(1, num_seq)])  # Ref 4
 
     b1 = (num_seq + 1) / (3 * (num_seq - 1))  # Ref 8

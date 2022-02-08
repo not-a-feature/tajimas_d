@@ -6,12 +6,18 @@ Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequenc
 ![Python Version Badge](https://img.shields.io/pypi/pyversions/tajimas_d)
 ![Download Badge](https://img.shields.io/pypi/dm/tajimas_d.svg)
 
-Tajima's D is a population genetic test statistic created which computes the difference between the mean number of pairwise differences and the number of segregating sites. It is used to determine if a population is expanding or shrinking.
+Tajima's D is a population genetic test statistic that computes the difference between the mean number of pairwise differences and the number of segregating sites. It is used to determine whether a population is expanding or shrinking.
 
 ## Tajima's D
 Tajima's D is defined as follows:
 
 ![Tajima](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}=\frac{\theta_{\pi}%20-%20\theta_{W}}{\sqrt{\text{Var}(\theta_{\pi}-\theta_{W})}})
+
+If ![expanding](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}<0), there are many rare variants, indicating an **expanding** population.
+
+Whereas ![declining](https://render.githubusercontent.com/render/math?math=0<\theta_\text{Tajima}), indicates an **declining** population as there are many intermediate variants.
+
+A result is consideres significant if  ![declining-sig](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}<-2) or ![expanding-sig](https://render.githubusercontent.com/render/math?math=2<\theta_\text{Tajima}).
 
 ## Pi-Estimator
 The π estimator is the average number of pairwise differences between any two sequences:
@@ -50,7 +56,7 @@ theta_w = watterson_estimator(sequences)
 
 ## Standalone version
 
-Clone the repository and cd into it. Intall the requirements (miniFasta > 2.2, for fasta reading).
+Clone the repository and cd into it. Intall the requirements (miniFasta >= 2.2, for fasta reading).
 
 ```
 usage: tajimas-d.py [-h] -f PATH [-p] [-t] [-w]
@@ -69,7 +75,7 @@ optional arguments:
 
 ## License
 ```
-Copyright (C) 2021 by Jules Kreuer - @not_a_feature
+Copyright (C) 2022 by Jules Kreuer - @not_a_feature
 This piece of software is published unter the GNU General Public License v3.0
 TLDR:
 
