@@ -47,7 +47,7 @@ def pi_estimator(sequences: List[str], safe=True) -> float:
     # Pairwise differences
     cs = [sum([not charA == charB for charA, charB in zip(seqA, seqB)]) for seqA, seqB in pairwise]
     n = len(sequences)
-    binomial = ((n - 1)*n)/2  # Binomial(n, 2)
+    binomial = ((n - 1) * n) / 2  # Binomial(n, 2)
 
     return sum(cs) / binomial
 
@@ -136,11 +136,11 @@ def tajimas_d(sequences: List[str]) -> float:
     b2 = (2 * (num_seq**2 + num_seq + 3)) / (9 * num_seq * (num_seq - 1))  # Ref 9
 
     c1 = b1 - 1 / harmonic
-    c2 = b2 - ((num_seq + 2) / (harmonic * num_seq)) + (a2 / (harmonic ** 2))
+    c2 = b2 - ((num_seq + 2) / (harmonic * num_seq)) + (a2 / (harmonic**2))
 
     e1 = c1 / harmonic
     e2 = c2 / ((harmonic**2) + a2)
 
-    delta_Theta = (theta_pi - (seg_sites/harmonic))
-    tD = delta_Theta / (((e1 * seg_sites) + (e2 * seg_sites * (seg_sites - 1)))**0.5)  # Ref 27
+    delta_Theta = theta_pi - (seg_sites / harmonic)
+    tD = delta_Theta / (((e1 * seg_sites) + (e2 * seg_sites * (seg_sites - 1))) ** 0.5)  # Ref 27
     return float(tD)
