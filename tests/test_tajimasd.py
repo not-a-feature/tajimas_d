@@ -16,26 +16,19 @@ allA = getSeqs(path.join(path.dirname(__file__), "allA.fasta"))
 MIT_example = getSeqs(path.join(path.dirname(__file__), "MIT_example.fasta"))
 
 
-@pytest.mark.parametrize("sequences,expected", [
-    (allA, 0),
-    (MIT_example, -1.446172)
-])
+@pytest.mark.parametrize("sequences,expected", [(allA, 0), (MIT_example, -1.446172)])
 def test_tajima(sequences, expected):
     assert round(tajimas_d(sequences), 6) == expected
 
 
-@pytest.mark.parametrize("sequences,expected", [
-    (allA, 0),
-    (MIT_example, 3.888889)
-])
+@pytest.mark.parametrize("sequences,expected", [(allA, 0), (MIT_example, 3.888889)])
 def test_pi(sequences, expected):
     assert round(pi_estimator(sequences), 6) == expected
 
 
-@pytest.mark.parametrize("sequences,expected", [
-    (allA, 0),
-    (MIT_example, 5.655772)  # Check if thats true
-])
+@pytest.mark.parametrize(
+    "sequences,expected", [(allA, 0), (MIT_example, 5.655772)]
+)  # Check if thats true
 def test_watterson(sequences, expected):
     assert round(watterson_estimator(sequences), 6) == expected
 

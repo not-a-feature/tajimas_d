@@ -5,6 +5,7 @@ Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequenc
 ![Test Badge](https://github.com/not-a-feature/tajimas_d/actions/workflows/tests.yml/badge.svg)
 ![Python Version Badge](https://img.shields.io/pypi/pyversions/tajimas_d)
 ![Download Badge](https://img.shields.io/pypi/dm/tajimas_d.svg)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Tajima's D is a population genetic test statistic that computes the difference between the mean number of pairwise differences and the number of segregating sites. It is used to determine whether a population is expanding or shrinking.
 
