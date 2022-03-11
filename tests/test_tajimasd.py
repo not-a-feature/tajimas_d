@@ -26,7 +26,9 @@ def test_pi(sequences, expected):
     assert round(pi_estimator(sequences), 6) == expected
 
 
-@pytest.mark.parametrize("sequences,expected", [(allA, 0), (MIT_example, 5.655772)])  # Check if thats true
+@pytest.mark.parametrize(
+    "sequences,expected", [(allA, 0), (MIT_example, 5.655772)]
+)  # Check if thats true
 def test_watterson(sequences, expected):
     assert round(watterson_estimator(sequences), 6) == expected
 

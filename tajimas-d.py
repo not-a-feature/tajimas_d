@@ -16,24 +16,46 @@ from src.tajimas_d._tajimas_d import tajimas_d, watterson_estimator, pi_estimato
 
 if __name__ == "__main__":
     # Parse arguments
-    parser = argparse.ArgumentParser(description="""
+    parser = argparse.ArgumentParser(
+        description="""
 tajimas-d: Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequences.
-""")
-    parser.add_argument('-f', "--file", action='store', dest='path',
-                        help="Path to fasta file with all sequences.",
-                        required=True)
+"""
+    )
+    parser.add_argument(
+        "-f",
+        "--file",
+        action="store",
+        dest="path",
+        help="Path to fasta file with all sequences.",
+        required=True,
+    )
 
-    parser.add_argument('-p', "--pi", action='store_true', dest='pi',
-                        help="Compute the Pi-Estimator score. (default)",
-                        required=False)
+    parser.add_argument(
+        "-p",
+        "--pi",
+        action="store_true",
+        dest="pi",
+        help="Compute the Pi-Estimator score. (default)",
+        required=False,
+    )
 
-    parser.add_argument('-t', "--tajima", action='store_true', dest='tajima',
-                        help="Compute the Pi-Estimator score.",
-                        required=False)
+    parser.add_argument(
+        "-t",
+        "--tajima",
+        action="store_true",
+        dest="tajima",
+        help="Compute the Pi-Estimator score.",
+        required=False,
+    )
 
-    parser.add_argument('-w', "--watterson", action='store_true', dest='watterson',
-                        help="Compute the Watterson-Estimator score.",
-                        required=False)
+    parser.add_argument(
+        "-w",
+        "--watterson",
+        action="store_true",
+        dest="watterson",
+        help="Compute the Watterson-Estimator score.",
+        required=False,
+    )
 
     args = parser.parse_args()
 
