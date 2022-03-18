@@ -62,14 +62,14 @@ Clone the repository and cd into it. Intall the requirements (miniFasta >= 2.2, 
 ```
 usage: tajimas-d.py [-h] -f PATH [-p] [-t] [-w]
 
-tajimas-d: Compute the Tajima s-D, Pi-Estimator or Watterson-Estimator for multiple
+tajimas-d: Compute Tajima's D, the Pi- or Watterson-Estimator for multiple
 sequences.
 
 optional arguments:
   -h, --help            show this help message and exit
   -f PATH, --file PATH  Path to fasta file with all sequences.
-  -p, --pi              Compute the Pi-Estimator score. (default)
-  -t, --tajima          Compute the Pi-Estimator score.
+  -p, --pi              Compute the Pi-Estimator score.
+  -t, --tajima          Compute the Pi-Estimator score. (default)
   -w, --watterson       Compute the Watterson-Estimator score.
 
 ```

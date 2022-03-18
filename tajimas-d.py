@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # Parse arguments
     parser = argparse.ArgumentParser(
         description="""
-tajimas-d: Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequences.
+tajimas-d: Compute Tajima's D, the Pi- or Watterson-Estimator for multiple sequences.
 """
     )
     parser.add_argument(
@@ -44,7 +44,7 @@ tajimas-d: Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multi
         "--tajima",
         action="store_true",
         dest="tajima",
-        help="Compute the Pi-Estimator score.",
+        help="Compute Tajima's D",
         required=False,
     )
 
