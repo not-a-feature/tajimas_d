@@ -9,6 +9,9 @@ License: GPL-3.0
 
 from itertools import combinations
 from typing import List
+import argparse
+import miniFasta
+from sys import argv
 
 
 def __check(sequences: List[str]) -> None:
@@ -144,3 +147,95 @@ def tajimas_d(sequences: List[str]) -> float:
     delta_Theta = theta_pi - (seg_sites / harmonic)
     tD = delta_Theta / (((e1 * seg_sites) + (e2 * seg_sites * (seg_sites - 1))) ** 0.5)  # Ref 27
     return float(tD)
+
+
+def parse_args(args):
+    """Parse command line parameters.
+
+    Args:
+      args (List[str]): command line parameters as list of strings
+          (for example  ``["--help"]``).
+
+    Returns:
+      :obj:`argparse.Namespace`: command line parameters namespace
+    """
+    # Parse arguments
+    parser = argparse.ArgumentParser(
+        description="""tajimas_d: Compute Tajima's D, the Pi- or Watterson-Estimator for multiple sequences."""
+    )
+
+    parser.add_argument(
+        "-f",
+        "--file",
+        action="store",
+        dest="path",
+        help="Path to fasta file with all sequences.",
+        required=True,
+    )
+
+    parser.add_argument(
+        "-p",
+        "--pi",
+        action="store_true",
+        dest="pi",
+        help="Compute the Pi-Estimator score. (default)",
+        required=False,
+    )
+
+    parser.add_argument(
+        "-t",
+        "--tajima",
+        action="store_true",
+        dest="tajima",
+        help="Compute Tajima's D",
+        required=False,
+    )
+
+    parser.add_argument(
+        "-w",
+        "--watterson",
+        action="store_true",
+        dest="watterson",
+        help="Compute the Watterson-Estimator score.",
+        required=False,
+    )
+
+    return parser.parse_args()
+
+
+def _main_cli(args):
+    args = parse_args(args)
+    # Load sequences
+    sequences = [mf.body for mf in miniFasta.read(args.path)]
+
+    # Compute
+    if args.tajima or not (args.pi or args.watterson):
+        print(f"Tajima's D score:\t\t{tajimas_d(sequences)}")
+
+    if args.pi:
+        print(f"Pi-Estimator score:\t\t{pi_estimator(sequences)}")
+
+    if args.watterson:
+        print(f"Watterson-Estimator score:\t{watterson_estimator(sequences)}")
+
+
+def run_cli():
+    """Calls :func:`_main_cli` passing the CLI arguments extracted from :obj:`sys.argv`.
+
+    This function is used as entry point to create a console script with setuptools.
+    """
+    _main_cli(argv[1:])
+
+
+if __name__ == "__main__":
+    # ^  This is a guard statement that will prevent the following code from
+    #    being executed in the case someone imports this file instead of
+    #    executing it as a script.
+    #    https://docs.python.org/3/library/__main__.html
+
+    # After installing your project with pip, users can also run your Python
+    # modules as scripts via the ``-m`` flag, as defined in PEP 338::
+    #
+    #     python -m tajimas_d.tajimas_d [ARGS]
+    #
+    run_cli()
