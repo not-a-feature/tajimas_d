@@ -35,6 +35,12 @@ Using pip  / pip3:
 ```bash
 pip install tajimas_d
 ```
+
+Using conda:
+```bash
+conda install -c bioconda tajimas_d
+```
+
 Or by source:
 ```bash
 git clone git@github.com:not-a-feature/tajimas_d.git
@@ -56,13 +62,10 @@ theta_w = watterson_estimator(sequences)
 
 
 ## Standalone version
-
-Clone the repository and cd into it. Intall the requirements (miniFasta >= 2.2, for fasta reading).
-
 ```
-usage: tajimas-d.py [-h] -f PATH [-p] [-t] [-w]
+usage: tajimas_d [-h] -f PATH [-p] [-t] [-w]
 
-tajimas-d: Compute Tajima's D, the Pi- or Watterson-Estimator for multiple
+tajimas_d: Compute Tajima's D, the Pi- or Watterson-Estimator for multiple
 sequences.
 
 optional arguments:
