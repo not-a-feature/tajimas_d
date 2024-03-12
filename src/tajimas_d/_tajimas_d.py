@@ -10,7 +10,13 @@ License: GPL-3.0
 from itertools import combinations
 from typing import List
 import argparse
-import miniFasta
+
+try:
+    from miniFasta import fasta_object
+except ModuleNotFoundError:
+    # Import as submodule of the bfx suite.
+    from ....miniFasta.src.miniFasta import fasta_object
+
 from sys import argv
 
 
