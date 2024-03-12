@@ -12,10 +12,10 @@ from typing import List
 import argparse
 
 try:
-    from miniFasta import fasta_object
+    from miniFasta import fasta_object, read
 except ModuleNotFoundError:
     # Import as submodule of the bfx suite.
-    from ....miniFasta.src.miniFasta import fasta_object  # type: ignore
+    from ....miniFasta.src.miniFasta import fasta_object, read  # type: ignore
 
 from sys import argv
 
@@ -243,7 +243,7 @@ def parse_args(args):
 def _main_cli(args):
     args = parse_args(args)
     # Load sequences
-    sequences = [mf.body for mf in miniFasta.read(args.path)]
+    sequences = [mf.body for mf in read(args.path)]
 
     # Compute
     if args.tajima or not (args.pi or args.watterson):
