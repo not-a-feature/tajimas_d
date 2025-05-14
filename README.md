@@ -1,6 +1,8 @@
-![tajimas-d](https://github.com/not-a-feature/tajimas_d/raw/main/tajimas-d.png)
+<img src="https://github.com/not-a-feature/tajimas_d/raw/main/tajimas-d.png" width=300px alt="tajimas_d logo"></img>
 
 Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequences.
+
+This module is now part of the bfx suite. See https://py-bfx.readthedocs.io for more information.
 
 ![Test Badge](https://github.com/not-a-feature/tajimas_d/actions/workflows/tests.yml/badge.svg)
 ![Python Version Badge](https://img.shields.io/pypi/pyversions/tajimas_d)
@@ -11,24 +13,23 @@ Tajima's D is a population genetic test statistic that computes the difference b
 
 ## Tajima's D
 Tajima's D is defined as follows:
+$\theta_\text{Tajima}=\frac{\theta_{\pi}%20-%20\theta_{W}}{\sqrt{\text{Var}(\theta_{\pi}-\theta_{W})}}$
 
-![Tajima](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}=\frac{\theta_{\pi}%20-%20\theta_{W}}{\sqrt{\text{Var}(\theta_{\pi}-\theta_{W})}})
+If $\theta_\text{Tajima}<0$, there are many rare variants, indicating an **expanding** population.
 
-If ![expanding](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}<0), there are many rare variants, indicating an **expanding** population.
+Whereas $0<\theta_\text{Tajima}$, indicates an **declining** population as there are many intermediate variants.
 
-Whereas ![declining](https://render.githubusercontent.com/render/math?math=0<\theta_\text{Tajima}), indicates an **declining** population as there are many intermediate variants.
-
-A result is consideres significant if  ![declining-sig](https://render.githubusercontent.com/render/math?math=\theta_\text{Tajima}<-2) or ![expanding-sig](https://render.githubusercontent.com/render/math?math=2<\theta_\text{Tajima}).
+A result is consideres significant if $\theta_\text{Tajima}<-2$ or $2<\theta_\text{Tajima}$.
 
 ## Pi-Estimator
 The π estimator is the average number of pairwise differences between any two sequences:
 
-![Pi](https://render.githubusercontent.com/render/math?math=\theta_{\pi}=\frac{\text{Nr.%20of%20pairwise%20differences}}{\binom{n}{2}})
+$\theta_{\pi}=\frac{\text{Nr. of pairwise differences}}{\binom{n}{2}}$
 
 ## Watterson-Estimator
 The Watterson estimator is the expected number of segregating sites.
 
-![Watterson](https://render.githubusercontent.com/render/math?math=\theta_{\W}=\frac{\text{Nr.%20of%20segregating%20sites}}{\sum^{n-1}_{i=1}\frac{1}{i}})
+$\theta_{W}=\frac{\text{Nr. of segregating sites}}{\Sigma_{i=1}^{n-1}\frac{1}{i}}$
 
 ## Installation
 Using pip  / pip3:
