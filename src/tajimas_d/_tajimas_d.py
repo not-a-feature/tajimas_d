@@ -10,7 +10,13 @@ License: GPL-3.0
 from itertools import combinations
 from typing import List
 import argparse
-import miniFasta
+
+try:
+    from miniFasta import fasta_object, read
+except ModuleNotFoundError:
+    # Import as submodule of the bfx suite.
+    from ....miniFasta.src.miniFasta import fasta_object, read  # type: ignore
+
 from sys import argv
 
 
@@ -18,10 +24,14 @@ def __check(sequences: List[str]) -> None:
     """
     Check for valid sequence proportions (1 < n, samle length).
 
-    Input:
-        sequences: list of str, list of sequences.
-    Returns:
-        Raises ValueError
+    Parameters
+    ----------
+        sequences: List[str]
+            List of sequences.
+
+    Raises
+    -------
+        ValueError: If less than two sequences are provided.
     """
     if len(sequences) < 2:
         raise ValueError("At leat 2 sequences required")
@@ -36,11 +46,17 @@ def pi_estimator(sequences: List[str], safe=True) -> float:
     Computes Θ_π, the Pi estimator.
     Θ_π = Number of pairwise differences / binomial(n, 2)
 
-    Input:
-        sequences: list of str, list of sequences.
-        safe: bool, check if sequences have the same length.
-    Returns:
-        Θ_π: float: Pi estimator.
+    Parameters
+    ----------
+        sequences: List[str]
+            List of sequences.
+        safe: bool, default: True
+            Check if sequences have the same length.
+
+    Returns
+    -------
+        Θ_π: float
+            Pi estimator value.
     """
     # Check for valid sequence proportions.
     if safe:
@@ -59,10 +75,13 @@ def __segregating(sequences: List[str]) -> int:
     """
     Counts the number of segregating sites.
 
-    Input:
-        sequences: list of str, list of sequences.
+    Parameters
+    ----------
+        sequences: List[str]
+            List of sequences.
     Returns:
-        seg_sites: int, number of segregating sites.
+        seg_sites: int
+            Number of segregating sites.
     """
     seg_sites = 0
     # For each position in sequence
@@ -78,10 +97,15 @@ def __segregating(sequences: List[str]) -> int:
 def __harmonic(n: int) -> float:
     """
     Computes the n-1th harmonic number.
-    Input:
+
+    Parameters
+    ----------
         n: int
-    Returns:
-        h: float, n-1th harmonic number
+
+    Returns
+    -------
+        h: float
+            N-th harmonic number
     """
     return sum([1 / i for i in range(1, n)])
 
@@ -90,11 +114,18 @@ def watterson_estimator(sequences: List[str], safe=True) -> float:
     """
     Computes Θ_W, the Watterson estimator.
     Θ_W = Number of segregating sites / (n th harmonic number)
-    Input:
-        sequences: list of str, list of sequences.
-        safe: bool, check for valid sequence proportions.
-    Returns:
-        Θ_W: float: Watterson estimator.
+
+    Parameters
+    ----------
+        sequences: List[str]
+            List of sequences.
+        safe: bool, default: True
+            Check for valid sequence proportions.
+
+    Returns
+    -------
+        Θ_W: float
+            Watterson estimator value.
     """
     # Check for valid sequence proportions.
     if safe:
@@ -111,12 +142,15 @@ def tajimas_d(sequences: List[str]) -> float:
     Computes Tajima's D for a list of sequences.
     See: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1203831/
     and https://ocw.mit.edu/courses/health-sciences-and-technology/hst-508-quantitative-
-        genomics-fall-2005/study-materials/tajimad1.pdf
+    genomics-fall-2005/study-materials/tajimad1.pdf
 
-    Input:
-        sequences: list of str, list of sequences.
+    Parameters
+    ----------
+        sequences: List[str]
+            List of sequences.
     Returns:
-        Θ_D: float: Tajima's D.
+        Θ_D: float
+            Tajima's D value.
     """
     # Check for valid sequence proportions.
     __check(sequences)
@@ -152,12 +186,15 @@ def tajimas_d(sequences: List[str]) -> float:
 def parse_args(args):
     """Parse command line parameters.
 
-    Args:
+    Args
+    ----
       args (List[str]): command line parameters as list of strings
           (for example  ``["--help"]``).
 
-    Returns:
-      :obj:`argparse.Namespace`: command line parameters namespace
+    Returns
+    -------
+      args: obj:`argparse.Namespace`
+        Command line parameters namespace
     """
     # Parse arguments
     parser = argparse.ArgumentParser(
@@ -206,7 +243,7 @@ def parse_args(args):
 def _main_cli(args):
     args = parse_args(args)
     # Load sequences
-    sequences = [mf.body for mf in miniFasta.read(args.path)]
+    sequences = [mf.body for mf in read(args.path)]
 
     # Compute
     if args.tajima or not (args.pi or args.watterson):
