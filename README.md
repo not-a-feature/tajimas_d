@@ -2,8 +2,6 @@
 
 Compute the Tajima's-D, Pi-Estimator or Watterson-Estimator for multiple sequences.
 
-This module is now part of the bfx suite. See https://py-bfx.readthedocs.io for more information.
-
 ![Test Badge](https://github.com/not-a-feature/tajimas_d/actions/workflows/tests.yml/badge.svg)
 ![Python Version Badge](https://img.shields.io/pypi/pyversions/tajimas_d)
 ![Download Badge](https://img.shields.io/pypi/dm/tajimas_d.svg)
